@@ -1,19 +1,20 @@
-// console.log("Hello, World!");
-
 function playRound(playerSelection, computerSelection) {
 	playerSelection = playerSelection.toLowerCase();
-	var declaration;
+	var output;
 	if (playerSelection == computerSelection) {
-		declaration = "It's a tie! You both chose " + playerSelection;
+		// declaration = "It's a tie! You both chose " + playerSelection;
+		output = 0;
 	} else if (
 		(playerSelection == "rock" && computerSelection == "scissors") ||
 		(playerSelection == "paper" && computerSelection == "rock") ||
 		(playerSelection == "scissors" && computerSelection == "paper")) {
-		declaration = "You Win! " + playerSelection + " beats " + computerSelection;
+		// declaration = "You Win! " + playerSelection + " beats " + computerSelection;
+		output = 1;
 	} else {
-		declaration = "You Lose! " + computerSelection + " beats " + playerSelection;
+		// declaration = "You Lose! " + computerSelection + " beats " + playerSelection;
+		output = 2;
 	}
-	return declaration;
+	return output;
 
 }
 
@@ -29,6 +30,38 @@ function computerPlay() {
 	}
 }
 
-const playerSelection = "rock";
-const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+	// let final = 5;
+	let playerSelection;
+	let computerSelection;
+	let player = 0;
+	let computer = 0;
+
+	for (let i = 0; i <= 4; i++) {
+		playerSelection = prompt();
+		computerSelection = computerPlay();
+		let result = playRound(playerSelection, computerSelection);
+		if (result == 1) {
+			console.log("You Win! " + playerSelection + " beats " + computerSelection);
+			player++;
+		} else if (result == 2) {
+			console.log("You Lose! " + computerSelection + " beats " + playerSelection);
+			computer++;
+		} else {
+			console.log("It's a tie! You both chose " + playerSelection);
+		}
+	}
+
+	let declaration;
+	if (player == computer) {
+		declaration = "It's a tie";
+	} else if (player > computer) {
+		declaration = "You Win!";
+	} else {
+		declaration = "You Lose!";
+	}
+	declaration += " " + player + " vs " + computer;
+	return declaration;
+}
+
+console.log(game());
